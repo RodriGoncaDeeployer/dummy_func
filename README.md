@@ -27,7 +27,7 @@ The issue seems to be related to the new dependency isolation feature introduced
 The error only occurs when running the Python 3.13 container image with Docker, suggesting the issue is specific to the containerized environment's dependency isolation implementation.
 
 # How to reproduce the error using `mcr.microsoft.com/azure-functions/python:4-python3.13` image.
-1. Clone this repository.
+1. Clone this repository. `git clone https://github.com/RodriGoncaDeeployer/dummy_func.git`
 2. Switch to `fail` branch: `git checkout fail`.
 3. Build the Docker image: `docker compose build`.
 4. Run the Docker container: `docker compose up --force-recreate`.
