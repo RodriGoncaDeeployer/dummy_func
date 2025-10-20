@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------------------------------
 # Stage 1: Base Build Stage
 # ---------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/azure-functions/python:4-python3.12 AS builder
+FROM mcr.microsoft.com/azure-functions/python:4-python3.13 AS builder
 
 # Set the working directory
 RUN mkdir /app
@@ -20,7 +20,7 @@ RUN uv sync --locked --no-cache --no-dev
 # ---------------------------------------------------------------------------------------------------
 # Stage 2: Production Stage
 # ---------------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/azure-functions/python:4-python3.12
+FROM mcr.microsoft.com/azure-functions/python:4-python3.13
 
 # Set the working directory
 WORKDIR /home/site/wwwroot
