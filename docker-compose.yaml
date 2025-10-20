@@ -1,0 +1,55 @@
+services:
+  func:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dummy-func
+    working_dir: /home/site/wwwroot
+    privileged: false
+    restart: "no"
+    networks:
+      - dummy-network
+    volumes:
+      - ./:/home/site/wwwroot
+    ports:
+      - "7071:80"
+    environment:
+      AzureFunctionsJobHost__Logging__Console__IsEnabled: true
+      AzureWebJobsStorage: "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://storage:10000/devstoreaccount1;"
+    depends_on:
+      - storage
+
+  storage:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: dummy-storage
+    privileged: false
+    networks:
+      - dummy-network
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - storage-data:/data
+      - storage-workspace:/workspace
+    entrypoint: >
+      azurite -l /workspace
+      -d /workspace/debug.log
+      --silent
+      --skipApiVersionCheck
+      --blobPort 10000
+      --blobHost 0.0.0.0
+      --queuePort 10001
+      --queueHost 0.0.0.0
+      --tablePort 10002
+      --tableHost 0.0.0.0
+
+volumes:
+  storage-data:
+    driver: local
+  storage-workspace:
+    driver: local
+
+networks: 
+  dummy-network:
+    driver: bridge

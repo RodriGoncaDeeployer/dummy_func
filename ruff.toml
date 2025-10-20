@@ -1,0 +1,25 @@
+line-length = 120
+indent-width = 4
+
+[lint]
+select = [
+    "E4", # Unused imports
+    "E7", # Unused variables
+    "E9", # Syntax errors
+    "F",  # Pyflakes
+    "B",  # Bugbear
+    # "I", # Import errors
+    ]
+
+ignore = [
+    "E501", # Line too long
+    "B006", # Do not use assert in tests
+    "F401", # Unused imports
+    ]
+
+unfixable = ["B"]
+
+[format]
+quote-style = "double"
+skip-magic-trailing-comma = false
+line-ending = "lf"

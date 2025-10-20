@@ -1,0 +1,10 @@
+[project]
+name = "dummy_func"
+version = "1.0.0"
+description = "Dummy func."
+readme = "README.md"
+requires-python = "==3.12.11"
+dependencies = [
+    "azure-functions==1.24.0",
+    "google-cloud-aiplatform==1.121.0",
+]
