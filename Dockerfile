@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/azure-functions/python:4-python3.13@sha256:2abfe9a6e06cb1b98ff9be0c6d1a858afd8cf11bff5a479f8ef97c221f7c0c47
+FROM mcr.microsoft.com/azure-functions/python:4-python3.13@sha256:f2486500c134e0b406825b3227a91b2097175d4c6a7008575772514567c9bbd5
 
 # Set the working directory
 WORKDIR /home/site/wwwroot
@@ -14,7 +14,12 @@ COPY ./pyproject.toml ./uv.lock /home/site/wwwroot/
 RUN uv export --format requirements.txt -o requirements.txt
 
 # Install dependencies to the Azure Functions Python packages directory
-RUN pip install --target="/home/site/wwwroot/.python_packages/lib/site-packages" -r requirements.txt
+RUN pip install -r requirements.txt
+
+# RUN pip install --target="/home/site/wwwroot/.python_packages/lib/site-packages" -r requirements.txt
+
+# Add venv to PATH
+# ENV PATH="/home/site/wwwroot/.python_packages/bin:${PATH}"
 
 # Set environment variables to optimize the Python runtime
 ENV PYTHONDONTWRITEBYTECODE=1
