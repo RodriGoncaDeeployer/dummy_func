@@ -7,7 +7,7 @@ WORKDIR /home/site/wwwroot
 COPY . /home/site/wwwroot
 
 # Install uv
-COPY --from=ghcr.io/astral-sh/uv:0.9.2 /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.9.8 /uv /uvx /bin/
 
 # Install python dependencies
 COPY ./pyproject.toml ./uv.lock /home/site/wwwroot/
